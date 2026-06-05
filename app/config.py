@@ -1,8 +1,12 @@
-from dotenv import load_env
+from pathlib import Path
+
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseModel):
+load_dotenv()
+
+class Settings(BaseSettings):
     PG_HOST: str
     PG_USER: str
     PG_PASS: str
@@ -15,7 +19,7 @@ class Settings(BaseModel):
     def postgres_url(self):
         return (
             f"postgresql+asyncpg://{self.PG_USER}:{self.PG_PASS}"
-            f"@{PG_HOST}:{PG_PORT}/{self.PG_NAME}"
+            f"@{self.PG_HOST}:{self.PG_PORT}/{self.PG_NAME}"
         )   
 
     model_config = SettingsConfigDict(env_file=BASE_DIR / ".env", env_file_encoding="utf-8")
