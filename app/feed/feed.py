@@ -19,12 +19,6 @@ templates = Jinja2Templates(directory=settings.TEMPLATES_DIR)
 async def feed(session: session, request: Request):
     query = (
         select(Post)
-        .options(load_only(
-            Post.title,
-            Post.content,
-            Post.author,
-            Post.created_at,
-        ))
         .order_by(Post.created_at.desc())
     )
     result = await session.execute(query)
