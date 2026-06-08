@@ -1,12 +1,12 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
-from app.database.config import settings
+from app.config import settings
 
 
 engine = create_async_engine(settings.postgres_url)
 sessionmaker = async_sessionmaker(bind=engine, expire_on_commit=False)
 
 
-def get_db():
-    with sessionmaker() as session:
+async def get_db():
+    async with sessionmaker() as session:
         yield session
