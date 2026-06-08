@@ -14,7 +14,7 @@ templates = Jinja2Templates(directory=settings.TEMPLATES_DIR)
 @route.get("/", response_class=HTMLResponse)
 async def feed(request: Request):
     return templates.TemplateResponse(
-        request=request, name="main.html", context=None
+        request=request, name="feed.html", context={"posts": []}
     )
 
 
