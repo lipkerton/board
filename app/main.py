@@ -11,6 +11,3 @@ app = FastAPI()
 
 app.include_router(feed.route)
 app.mount("/static", StaticFiles(directory=settings.STATIC_DIR))
-
-
-templates = Jinja2Templates(directory=settings.TEMPLATES_DIR)

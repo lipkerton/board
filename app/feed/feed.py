@@ -1,12 +1,21 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+from app.config import settings
 from . import schemas
 
 
 route = APIRouter()
 
-@route.get("/")
-def feed():
-    return {"message": "Hello world!"}
+templates = Jinja2Templates(directory=settings.TEMPLATES_DIR)
+
+
+@route.get("/", response_class=HTMLResponse)
+async def feed(request: Request):
+    return templates.TemplateResponse(
+        request=request, name="main.html", context=None
+    )
 
 
 @route.post("/post")

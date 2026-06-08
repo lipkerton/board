@@ -4,8 +4,8 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <header>{% block header %}{% endblock %}</header>
+        <header>{% include 'header.html' %}</header>
         <main>{% block content %}{% endblock %}</main>
-        <footer>{% block footer %}{% endblock %}</footer>
+        <footer>{% include 'footer.html' %}</footer>
     </body>
 </html>
